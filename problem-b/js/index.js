@@ -3,14 +3,24 @@
 /* Define a function `addFour()` that takes a single argument 
    and returns a value 4 greater than the input.*/
 
+   function addFour(num) {
+      return num + 4; 
+   }
+
    
 /* Create and log a variable `twelve` that is the result of passing 8 to your
    addFour() function. */
+
+   var twelve = addFour(8);
+   console.log(twelve); 
 
    
 /* Create and log a variable `twelveString` that is the result of passing "8" 
    (a string) to your addFour() function. Consider what this tells you about how
   the function should be explained (e.g., in a comment). */
+
+   var twelveString = addFour("8");
+   console.log(twelveString);
 
   
 
@@ -26,6 +36,11 @@
      http://www.mathwarehouse.com/calculators/continuous-compound-interest-calculator.php
 */
 
+function compoundInterest(balance, interest, years) {
+  return (balance * Math.exp(interest * years));
+
+}
+
 
 
 /* Define a function `fizzBuzz()` that takes in a single number as an argument.
@@ -35,6 +50,25 @@
    number. For numbers which are multiples of both three and five, the array 
    should contain "FizzBuzz" instead of the number.
    The returned array should be empty for arguments less than 1. */
+
+   function fizzBuzz(num) {
+    var fizz = []; 
+
+     for(var i = 1; i < num; i++) {
+       if(i % 3 == 0 && i % 5 == 0) {
+         fizz.push("FizzBuzz");
+       } else if(i % 3 == 0) {
+         fizz.push("Fizz");
+       } else if (i % 5 == 0) {
+         fizz.push("Buzz");
+       } else {
+         fizz.push(i);
+       }
+     }
+
+     return fizz; 
+
+   }
 
    
 
@@ -48,6 +82,22 @@
    for if the letter is not in the Object yet!
    You can test this method with a word like "Mississippi". */
 
+   function getLetterFrequencies(string) {
+     var length = string.length;
+     var frequency = {};
+
+     for(var i = 0; i < length; i++) {
+       var char = string.charAt(i);
+       
+       if(frequency[char] == undefined) {
+         frequency[char] = 1; 
+       } else {
+         frequency[char]++; 
+       }
+     }
+
+     return frequency; 
+   }
    
 
 /* Create a variable `deck` that represents a deck of modern playing cards
@@ -62,7 +112,25 @@
     
     You can log out the `deck` to check your work! */
 
-    
+    var deck = [];
+
+    for(var i = 0; i < 4; i++) { // goes through suits
+      var suit;
+
+      if(i == 0) {
+        suit = "hearts";
+      } else if (i == 1) {
+        suit = "diamonds";
+      } else if (i == 2) {
+        suit = "clubs";
+      } else {
+        suit = "spades";
+      }
+
+      for(var j = 2; j < 15; j++) { // goes through rank
+        deck.push({suit, rank: j});
+      }
+    }
 
 //You can test the below functions by creating e.g., a `pokerHand` array that 
 //contains five cards from the `deck`.
@@ -72,6 +140,18 @@
    is in that array.
    Hint: use a loop to check each card. */
 
+   function containsQueenOfHearts(cards) {
+     var length = cards.length; 
+
+     for(var i = 0; i < length; i++) {
+       if(cards[i].suit == "hearts" & cards[i].rank == 12) {
+         return true;
+       } else if(i == length -1) {
+         return false;
+       }
+     }
+   }
+
    
 
 /* Define a function `getHighCard()` that takes in an array of "card" objects
@@ -79,11 +159,39 @@
   with the highest rank. Cards of different suits but the same rank are 
   considered to have the same value, and either is a valid result */
 
+  function getHighCard(cards) {
+    var length = cards.length; 
+    var highestRank = cards[0].rank;
+    var highestCard = cards[0];
+
+    for(var i = 0; i < length; i++) {
+
+      if(cards[i].rank > highestRank) {
+        highestRank = cards[i].rank;
+        highestCard = cards[i];
+      }
+    }
+
+    return highestCard; 
+  }
+
   
 
 /* Define a function `isFlush()` that takes in an array of "card" objects and
    returns whether or not the cards all have the same _suit_. */
 
+   function isFlush(cards) {
+    var length = cards.length; 
+    var cardsSuit = cards[0].suit; 
+
+    for(var i = 0; i < length; i++) {
+      if(cardsSuit != cards[i].suit) {
+        return false;
+      } else if(i == length-1) {
+        return true; 
+      }
+    }
+   }
    
 
 /* Extra challenge: define a function `hasPair()` that takes in an array of 
